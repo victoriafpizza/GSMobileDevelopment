@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, FlatList } from 'react-native';
 
+// Registra o tempo de interrupção.
+
 export default function Interrupcao({ eventos, setEventos, navigation }) {
   const [tempo, setTempo] = useState('');
   const [localSelecionado, setLocalSelecionado] = useState('');

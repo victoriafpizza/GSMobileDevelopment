@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, ScrollView, Button } from 'react-native';
 
+// Tela só informativa, sem cadastro.
+
 export default function Recomendacoes({ navigation }) {
   return (
     <ScrollView contentContainerStyle={{ padding: 20 }}>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, FlatList } from 'react-native';
 
+// Cadastra prejuízos dos eventos
+
 export default function Prejuizos({ eventos, setEventos, navigation }) {
   const [prejuizo, setPrejuizo] = useState('');
   const [localSelecionado, setLocalSelecionado] = useState('');

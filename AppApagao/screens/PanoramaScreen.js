@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, FlatList, Button } from 'react-native';
 
+// Mostra o resumo dos eventos cadastrados.
+
 export default function Panorama({ eventos, navigation }) {
   return (
     <View style={{ padding: 20 }}>
