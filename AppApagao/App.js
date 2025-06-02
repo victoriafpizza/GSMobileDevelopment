@@ -6,6 +6,8 @@ import Localizacao from './screens/LocalizacaoScreen';
 import Interrupcao from './screens/InterrupcaoScreen';
 import Prejuizos from './screens/PrejuizosScreen';
 import Recomendacoes from './screens/RecomendacoesScreen';
+import TelaPanorama from './screens/TelaPanorama';
+import TelaCadastro from './screens/TelaCadastro';
 
 const Stack = createNativeStackNavigator();
 
