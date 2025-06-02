@@ -1,29 +1,74 @@
 import React from 'react';
-import { View, Text, FlatList, Button } from 'react-native';
+import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-// Mostra o resumo dos eventos cadastrados.
+export default function TelaPanorama({ route }) {
+  const navigation = useNavigation();
+  const { itens = [] } = route.params || {};
 
-export default function Panorama({ eventos, navigation }) {
+  const renderItem = ({ item }) => (
+    <View style={styles.card}>
+      <Text style={styles.titulo}>Local: {item.local}</Text>
+      <Text>Tempo sem energia: {item.tempoSemEnergia || 'Não informado'}</Text>
+      <Text>Prejuízo: {item.prejuizo || 'Não informado'}</Text>
+      <Text>Data: {item.data}</Text>
+    </View>
+  );
+
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 22, marginBottom: 10 }}>Panorama Geral</Text>
-      {eventos.length === 0 ? (
-        <Text>Nenhum evento cadastrado.</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>Panorama Geral</Text>
+
+      {itens.length === 0 ? (
+        <Text style={styles.vazio}>Nenhum dado cadastrado.</Text>
       ) : (
         <FlatList
-          data={eventos}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <View style={{ marginBottom: 10, borderBottomWidth: 1, paddingBottom: 5 }}>
-              <Text>Local: {item.local}</Text>
-              <Text>Tempo sem energia: {item.interrupcao}</Text>
-              <Text>Prejuízo: {item.prejuizo}</Text>
-              <Text>Data: {item.data}</Text>
-            </View>
-          )}
+          data={itens}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={renderItem}
         />
       )}
-      <Button title="Ir para Localização" onPress={() => navigation.navigate('Localizacao')} />
+
+      <Button
+        title="Ir para Cadastro"
+        onPress={() =>
+          navigation.navigate('Cadastro', {
+            adicionarItem: route.params?.adicionarItem,
+          })
+        }
+        color="#2196F3"
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#F5F5F5',
+  },
+  header: {
+    fontSize: 24,
+    marginBottom: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 15,
+    marginBottom: 15,
+    elevation: 2,
+  },
+  titulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  vazio: {
+    alignSelf: 'center',
+    marginVertical: 20,
+    color: '#888',
+  },
+});
